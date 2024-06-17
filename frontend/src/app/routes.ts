@@ -10,13 +10,13 @@ export const routes: Routes = [
         title: 'Home page'
     },
     {
+        path: 'contest/:id',
+        component: ContestPageComponent,
+        title: 'Contest'
+    },
+    {
         path: '',
         redirectTo: '/home',
         pathMatch: 'full'
-    },
-    {
-        path: '/contest/:id',
-        component: ContestPageComponent,
-        title: 'Contest'
     },
 ];

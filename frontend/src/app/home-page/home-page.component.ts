@@ -5,9 +5,9 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   standalone: true,
   imports: [],
   templateUrl: './home-page.component.html',
-  styleUrl: './home-page.component.scss',
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: './home-page.component.scss'
+  // encapsulation: ViewEncapsulation.None,
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomePageComponent {
 
