@@ -24,13 +24,11 @@ import {HomePageComponent} from "./home-page/home-page.component";
     <h1>
     this is it
     </h1>
-    <router-outlet> </router-outlet>
     <app-view-model ></app-view-model>
     <h1>
 
     this is it
     </h1>
-    <app-home-page></app-home-page>
   `
 })
 export class AppComponent {
