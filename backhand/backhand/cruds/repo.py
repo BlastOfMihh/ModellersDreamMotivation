@@ -1,82 +1,37 @@
-from .motivation import Motivation
-from .founder import Founder
 from faker import Faker
-from .user import User
+from .domain.user import User
+from .domain.contest import Contest
+from .domain.submission import Submission
+from flask_sqlalchemy import SQLAlchemy
 
 class Repo:
-    def __init__(self, db) -> None:
-        # self.entities=[ ]
+    def __init__(self, db:SQLAlchemy) -> None:
         self.db=db
 
-    def add(self, entity):
-        self.db.session.add(entity)
-        self.db.session.commit()
+    def submission_add(self,submission):
+        self.db.session.add(submission)
+        self.db.commit()
+        return submission
     
-    def founder_add(self, founder):
-        self.db.session.add(founder)
-        self.db.session.commit()
+    def contest_add(self, contest):
+        self.db.session.add(contest)
+        self.db.commit()
+        return contest
 
-    def remove(self, id):
-        Motivation.query.filter(Motivation._id ==id).delete()
-        self.db.session.commit()
-
-    def founder_remove(self, id):
-        Founder.query.filter(Founder._id==id).delete()
-        self.db.session.commit()
-
-
-    def update(self, id, entity:Motivation):
-        motivation = Motivation.query.filter_by(_id=id).first()
-        if motivation is not None:
-            motivation.name=entity.name
-            motivation.strength=entity.strength
-            self.db.session.commit()
+    def get_contests_page(self, index, page_size):
+        return self.db.paginate(self.db.select(Contest))
     
-    def founder_update(self, id, founder:Founder):
-        found_founder:Founder = Founder.query.filter_by(_id=id).first()
-        if founder is not None:
-            found_founder.name=founder.name
-            found_founder.motivation_id = founder.motivation_id
-            found_founder.email = founder.email
-            self.db.session.commit()
-
-
-    def get(self, id):
-        return Motivation.query.filter_by(_id=id).first()
-
-    def founder_get(self, id):
-        return Founder.query.filter_by(_id=id).first()
-
-    def get_all(self):
-        return Motivation.query.all()
-
-    def get_motivations_page(self, page, per_page):
-        users_page = self.db.paginate(self.db.select(Motivation))
-        return users_page
-
-    def founder_get_all(self):
-        return Founder.query.all()
+    def submission_get_page(self, index, page_size):
+        return self.db.paginate(self.db.select(Submission))
     
-    def commit_to_db(self):
+    def contest_update(self, id, updated_contest):
+        contest = Contest.query.filter_by(_id=id).first()
+        contest.name=updated_contest.name
+        contest.task=updated_contest.task
+        contest.max_participants_count=updated_contest.max_participants_count
+        contest.start_time=updated_contest.start_time
+        contest.end_time=updated_contest.end_time
         self.db.session.commit()
-
-    def add_secondary_faker_data(self, count=100000):
-        from random import choice
-        fakerul=Faker()
-        elements=self.get_all()
-        all_ids=[x._id for x in elements]
-        # print(all_ids)
-        new_founders=[]
-        for i in range(count):
-            _id=choice(all_ids)
-            new_founder=Founder(fakerul.name(), fakerul.email(), _id)
-            new_founders.append(new_founder)
-        self.db.session.bulk_save_objects(new_founders)
-        self.db.session.commit()
-
-    def get_founders_by_motivation_id(self, id):
-        founders = Founder.query.filter(Founder.motivation_id ==id)
-        return founders
 
     #users code
     def add_user(self, user):
@@ -102,16 +57,12 @@ class Repo:
             if updated_user.user_type is not None:
                 user.user_type = updated_user.user_type
             self.db.session.commit()
+    
 
     def user_remove(self, id):
         User.query.filter(User._id==id).delete()
         self.db.session.commit()
-        # user = self.get_user(id)
-        # if user is not None:
-        #     self.db.session.delete(user)
-        #     self.db.session.commit()
 
     def get_all_users(self, page=1, per_page=10):
-        # users_page = self.db.paginate(self.db.select(User).where(User.user_type!="admin"))
         users_page = self.db.paginate(self.db.select(User))
         return users_page
