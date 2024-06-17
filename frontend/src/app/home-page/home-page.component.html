@@ -1,1 +1,92 @@
-<p>home-page works!</p>
+
+<!-- <html>
+<head>
+    <title>3D Building Contests</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>3D Building Contests</h1>
+    </header>
+    <main>
+        <section id="contests">
+            <h2>Current Contests</h2>
+        
+        </section>
+        <section id="submit">
+            <h2>Submit Your Design</h2>
+        
+        </section>
+    </main>
+    <footer>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html> -->
+
+<!-- <p>home-page works!</p> -->
+<main class="container">
+    <section class="sidebar">
+        <div class="contest-type">
+            <h2>Current Contests</h2>
+            <ul>
+                <li *ngFor="let contest of currentContests">{{ contest }}</li>
+            </ul>
+        </div>
+
+        <div class="contest-type">
+            <h2>Archived Contests</h2>
+            <ul>
+                <li *ngFor="let contest of archivedContests">{{ contest }}</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="main-content">
+        <h2>Information and Rules</h2>
+        <p>Submit your design for a chance to win a prize! Everything on our website is <b>free</b> !</p>
+        <h3>Contest Rules</h3> 
+        <p> 3D models only, no offensive content, no copyrighted content marketed as your own, etc. </p>
+        <h2>Ranking</h2>
+        <!-- Ranking entries will go here -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>User</th>
+                    <th>Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td class="user-cell">user1</td>
+                    <td>1101</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td class="user-cell">user2</td>
+                    <td>1000</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td class="user-cell">user3</td>
+                    <td>997</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td class="user-cell">user4</td>
+                    <td>995</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class="view-all-text" colspan="3">[View All]</td>
+                </tr>
+            </tfoot>
+        </table>
+    </section>
+</main>
+<footer>
+    <!-- Footer information goes here -->
+</footer>
