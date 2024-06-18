@@ -7,12 +7,16 @@ import { NgFor } from '@angular/common';
 //import {HomePageComponent} from "./home-page/home-page.component";
 import { RouterOutlet } from '@angular/router';
 import { HomePageModule } from './home-page/home-page.module';
+import { FooterComponent } from './footer/footer.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @Component({
   imports: [
     ViewModelComponent,
     UiComponent,
     EngineComponent,
+    FooterComponent,
+    NavbarComponent,
     //HomePageComponent,
     HomePageModule,
     RouterOutlet
@@ -23,13 +27,9 @@ import { HomePageModule } from './home-page/home-page.module';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template:
   `
-    <h1>
-    this is it
-    </h1>
+    <app-navbar></app-navbar>
     <router-outlet></router-outlet>
-    <h1>
-    this is it
-    </h1>
+    <app-footer></app-footer>
   `,
   providers:[]
 })
