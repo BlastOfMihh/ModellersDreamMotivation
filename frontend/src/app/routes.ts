@@ -28,7 +28,7 @@ export const routes: Routes = [
         title: 'Profile'
     },
     {
-        path: "create-contest",
+        path: "contest-creation",
         component: CreateContestPageComponent,
         title: 'Create contest'
     },
