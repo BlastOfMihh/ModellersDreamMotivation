@@ -81,11 +81,23 @@
               </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let submission of user.allSubmissions">
-                    <td>{{submission.id}}</td>
-                    <td>{{submission.contestId}}</td>
-                    <td>{{submission.status}}</td>
-                    <td>{{submission.time}}</td>
+                <tr>
+                    <td> {{ submission1.id }} </td>
+                    <td> {{ submission1.contestId }} </td>
+                    <td> {{ submission1.status }} </td>
+                    <td> {{ submission1.time }} </td>
+                </tr>
+                <tr>
+                    <td> {{ submission2.id }} </td>
+                    <td> {{ submission2.contestId }} </td>
+                    <td> {{ submission2.status }} </td>
+                    <td> {{ submission2.time }} </td>
+                </tr>
+                <tr>
+                    <td> {{ submission3.id }} </td>
+                    <td> {{ submission3.contestId }} </td>
+                    <td> {{ submission3.status }} </td>
+                    <td> {{ submission3.time }} </td>
                 </tr>
             </tbody>
           </table>
