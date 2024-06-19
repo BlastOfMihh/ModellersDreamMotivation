@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
 import { EngineComponent } from './engine/engine.component';
 import { UiComponent } from './ui/ui.component';
-import { ViewModelComponent } from './viewmodel/engine.component';
+import { ViewModelComponent } from './model-display/model-display.component';
 import { NgFor } from '@angular/common';
 import {HomePageComponent} from "./home-page/home-page.component";
 import { RouterOutlet, provideRouter } from '@angular/router';

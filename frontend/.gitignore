@@ -1,5 +1,15 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+backhand/backhand/__pycache__/__init__.cpython-312.pyc
+backhand/backhand/cruds/__pycache__/controller.cpython-312.pyc
+backhand/backhand/cruds/__pycache__/repo.cpython-312.pyc
+backhand/backhand/cruds/__pycache__/service.cpython-312.pyc
+backhand/backhand/cruds/domain/__pycache__/contest.cpython-312.pyc
+backhand/backhand/cruds/domain/__pycache__/submission.cpython-312.pyc
+backhand/backhand/cruds/domain/__pycache__/user_types.cpython-312.pyc
+backhand/instance/mydb.db
+
+
 # Compiled output
 /dist
 /tmp

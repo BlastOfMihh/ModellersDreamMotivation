@@ -1,3 +1,10 @@
+
+/backhand/backhand/__pycache__
+/backhand/backhand/cruds/__pycache__
+/backhand/backhand/cruds/domain/__pycache__
+/backhand/instance
+
+
 # Logs
 logs
 *.log

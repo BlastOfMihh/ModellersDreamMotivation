@@ -130,6 +130,26 @@ def register_routes(app:Flask, socketio, service):
         except Exception as e:
             return str(e), 400
         
+    from flask import send_file
+    import os
+
+    from flask import send_file
+    from io import BytesIO
+    
+    @app.route('/model/<submission_id>', methods=['GET'])
+    def get_model(submission_id):
+        # Fetch the model from the database
+        model=service.get_model(submission_id)
+
+        if model is not None:
+            # Create a BytesIO object from the binary data
+            model_io = BytesIO(model)  # replace 'data' with the actual attribute name
+    
+            # Send the file
+            return send_file(model_io, mimetype='model/gltf+json')
+        else:
+            return 'Model not found', 404
+            
     @app.route("/submission/page", methods=['GET'])
     def submission_page():
         try :

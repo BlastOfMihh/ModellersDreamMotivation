@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation, inject } from '@angular/core';
-import { EngineService } from './engine.service';
+import { EngineService } from './model-display'; 
+import { Input } from '@angular/core';
 
 @Component({
   selector: 'app-view-model',
@@ -16,6 +17,9 @@ export class ViewModelComponent implements OnInit {
 
   @ViewChild('rendererCanvas', {static: true})
   public rendererCanvas: ElementRef<HTMLCanvasElement>;
+
+  @Input()
+  contest_id:number
 
   engServ=inject(EngineService)
 

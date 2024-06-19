@@ -33,6 +33,9 @@ class Repo:
         contest.end_time=updated_contest.end_time
         self.db.session.commit()
 
+    def get_model(self, submission_id):
+        submission=self.db.session.query(Submission).filter(Submission._id == submission_id).one()
+        return submission.binary_model
     #users code
     def add_user(self, user):
         self.db.session.add(user)
@@ -40,7 +43,7 @@ class Repo:
 
     def get_user(self, id):
         try:
-            user = self.db.session.query(User).filter(User.id == id).one()
+            user = self.db.session.query(User).filter(User._id == id).one()
             return user
         except Exception:
             return None

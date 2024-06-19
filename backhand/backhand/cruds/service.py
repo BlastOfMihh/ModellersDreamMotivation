@@ -28,6 +28,10 @@ class Service:
         print(submmision)
         return self.repo.submission_add(submmision)
     
+
+    def get_model(self, submission_id):
+        return self.repo.get_model(submission_id)
+    
     def submission_get_page(self, index=1, page_size=100):
         return self.repo.submissions_get_page()
 
