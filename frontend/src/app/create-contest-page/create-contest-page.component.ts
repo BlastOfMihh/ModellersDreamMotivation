@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-contest-page',
@@ -36,11 +37,15 @@ export class CreateContestPageComponent {
   // Options for maximum participants
   participantOptions: number[] = [1, 2, 3, 4, 5];
 
-  // Options for start time
-  startTimeOptions: string[] = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00'];
+  durationControl = new FormControl('', [
+    Validators.required,
+    this.numberValidator
+  ]);
 
-  // Options for duration in hours
-  durationOptions: number[] = [1, 2, 3, 4, 5, 6, 7, 8];
+  numberValidator(control: FormControl) {
+    const isNumber = !isNaN(control.value);
+    return isNumber ? null : { number: true };
+  }
 
   onSubmit() {
     console.log(this.contest);
