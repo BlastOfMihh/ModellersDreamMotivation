@@ -1,8 +1,4 @@
-<app-view-model></app-view-model>
-<input type="file" id="file" (change)="onFileSelected($event)">
 
-<br>
-<button (click)="onSubmit()">Submit</button>
 <div class="contest-container">
     <div class="contest-card">
       <div class="card-header">
@@ -47,6 +43,13 @@
             <a href="/view-votes/0">  <!--  0 este id-ul contest-ului -->
               <button class="voting-btn">Go to Voting Section</button>
             </a>
+          </div>
+          <div>
+            <app-view-model></app-view-model>
+            <input type="file" id="file" (change)="onFileSelected($event)">
+
+            <br>
+            <button (click)="onSubmit()">Submit</button>
           </div>
         </div>
       </div>

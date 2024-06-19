@@ -10,7 +10,7 @@ class Repo:
     def __init__(self, db:SQLAlchemy) -> None:
         self.db=db
 
-    def contest_get(id):
+    def contest_get(self, id):
         return Contest.query.filter_by(_id=id).first()
 
     def submission_add(self,submission):

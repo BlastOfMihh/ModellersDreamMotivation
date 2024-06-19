@@ -34,11 +34,11 @@ class Contest(db.Model):
         }
 
     def get_state(self):
-        if self.start_time < datetime.now() < self.end_time:
+        if self.start_time < datetime.now() and datetime.now< self.end_time:
             return ContestStates.RUNNING
-        elif self.end_time <= datetime.now():
+        elif self.end_time < datetime.now():
             return ContestStates.OVER
-        elif self.start_time >= datetime.now():
+        elif self.start_time > datetime.now():
             return ContestStates.BEFORE_START
         else:
             return ContestStates.INVALID

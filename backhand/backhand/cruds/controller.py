@@ -136,10 +136,10 @@ def register_routes(app:Flask, socketio, service):
             return str(e), 400
 
     @app.route("/submit", methods=['POST'])
-    # @jwt_required()
+    @jwt_required()
     def submission_post():
-        try:
-        # if True:
+        # try:
+        if True:
             user_id = get_user_id()
             contest_id = int(request.form.get("contest_id"))
             binary_model_file = request.files.get("binary_model")
@@ -156,8 +156,8 @@ def register_routes(app:Flask, socketio, service):
                 return 'Submission received!', 200
             else:
                 raise Exception("Contest is not running")
-        except Exception as e:
-            return str(e), 400
+        # except Exception as e:
+        #     return str(e), 400
         
     @app.route("/submission/<contest_id>", methods=['GET'])
     @jwt_required()
