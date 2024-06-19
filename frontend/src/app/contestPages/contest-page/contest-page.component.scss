@@ -66,14 +66,20 @@
 .participants-section {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
+    justify-content: center;
+    align-items: flex-start;
     gap: 10px;
 }
 
-.card-text-participants {
-    font-weight: 300;
+.participants-title {
+    font-size: 1.2em;
     font-family: 'Roboto', sans-serif;
+}
+
+.card-text-participants {
+    font-size: 1.05em;
+    font-weight: bold;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .submissions-score-section {
@@ -85,10 +91,14 @@
     width: 100%;
 }
 
-.submissions-score-section h2,
-.submissions-score-section p,
-.submissions-score-section button {
-    margin-bottom: 20px;
+.start-time-title {
+    font-size: 1.2em;
+    font-family: 'Roboto', sans-serif;
+}
+
+.card-text-start-time {
+    font-size: 1em;
+    font-family: 'Roboto', sans-serif;
 }
 
 .duration-section {
@@ -110,6 +120,11 @@
     font-family: 'Roboto', sans-serif;
 }
 
+.card-text-submissions {
+    font-weight: bold;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
 .view-submissions-btn {
     border: none;
     background-color: #2C74B3;
@@ -119,9 +134,10 @@
     padding: 5px 10px;
     border-radius: 7px;
     margin-top : 10px;
-    width:6vw;
+    width: auto;
     height: 4vh;
     min-width: fit-content;
+    white-space: nowrap;
 }
 
 .view-submissions-btn:hover {
