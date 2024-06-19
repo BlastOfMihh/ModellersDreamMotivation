@@ -29,5 +29,23 @@ class Contest(db.Model):
             'max_participants_count': self.max_participants_count,
             'task': self.task,
             'start_time': self.start_time,
-            'end_time': self.end_time
+            'end_time': self.end_time,
+            "state":self.get_state().value
         }
+
+    def get_state(self):
+        if self.start_time < datetime.now() < self.end_time:
+            return ContestStates.RUNNING
+        elif self.end_time <= datetime.now():
+            return ContestStates.OVER
+        elif self.start_time >= datetime.now():
+            return ContestStates.BEFORE_START
+        else:
+            return ContestStates.INVALID
+
+from enum import Enum
+class ContestStates(Enum):
+    BEFORE_START = "before_start"
+    RUNNING = "running"
+    VOTING = "voting"
+    OVER = "over"

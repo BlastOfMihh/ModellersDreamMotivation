@@ -5,10 +5,14 @@ from sqlalchemy.orm import Mapped , mapped_column , DeclarativeBase , relationsh
 
 class Submission(db.Model):
     __tablename__ = "submissions"
+    # _id = db.Column(db.Integer, primary_key=True)
+    # user_id = db.Column(db.Integer)
+    # contest_id = db.Column(db.Integer)
+    # binary_model = db.Column(db.LargeBinary)
     _id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users._id"))
     contest_id: Mapped[int] = mapped_column(ForeignKey("contests._id"))
-    binary_model = db.Column(BLOB, nullable=False)
+    binary_model = db.Column(db.LargeBinary, nullable=False)
     
     # user: Mapped["User"] = relationship(back_populates="contests")
     # contest: Mapped["Contest"] = relationship(back_populates="users")

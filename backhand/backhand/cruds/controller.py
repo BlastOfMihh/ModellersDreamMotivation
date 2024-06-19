@@ -10,14 +10,14 @@ from flask_socketio import send, emit
 from .domain.user_types import UserTypes
 
 from .domain.user import User
-from .domain.contest import Contest
+from .domain.contest import Contest, ContestStates
 from .domain.submission import Submission
 
 from datetime import datetime
 
 def manager_only_decorator(func):
     def wrapper(*args, **kwargs):
-        ok_roles=[str(UserTypes.ADMIN.value[0]), str(UserTypes.MANAGER.value[0]), str(UserTypes.INVESTER.value[0])]
+        ok_roles=[str(UserTypes.ADMIN.value), str(UserTypes.MANAGER.value), str(UserTypes.INVESTER.value)]
         print(ok_roles)
         invoker=get_jwt_identity()
         if str(invoker['user_type']) in ok_roles:
@@ -29,7 +29,7 @@ def manager_only_decorator(func):
 def admin_only_decorator(func):
     def wrapper(*args, **kwargs):
         invoker=get_jwt_identity()
-        if str(invoker['user_type'])==str(UserTypes.ADMIN.value[0]):
+        if str(invoker['user_type'])==str(UserTypes.ADMIN.value):
             return func(*args, **kwargs)
         return "User is not an Admin", 443
     wrapper.__name__ = func.__name__
@@ -43,13 +43,25 @@ def register_routes(app:Flask, socketio, service):
     def broadcast_contests_refresh():
         socketio.emit("contests-refresh", "ehh")
 
+    def contest_dict_for_basic_user(contest_dict):
+        invoker=get_jwt_identity()
+        if str(invoker['user_type'])==str(UserTypes.BASIC.value):
+            contest_dict["task"]="Task not available yet, wait for the contest to start. please.."
+        return contest_dict
+
     @app.route("/contest/<id>", methods=['GET'])
     # @jwt_required()
     def contest_get(id):
         try:
             id=int(id)
+            invoker=get_jwt_identity()
             contest=service.contest_get(id)
-            return contest.to_dict()
+            contest_dict=contest.to_dict()
+            if invoker==UserTypes.BASIC:
+               # if contest.get_state() == ContestStates.BEFORE_START:
+               #     contest_dict["task"]="Task not available yet, wait for the contest to start. please.."
+                return contest_dict_for_basic_user(contest_dict)
+            return contest_dict
         except Exception as e:
             return str(e), 400
 
@@ -73,41 +85,48 @@ def register_routes(app:Flask, socketio, service):
             name=json["name"]
             task=json["task"]
             max_participants_count=int(json["max_participants_count"])
-            start_time=datetime(json["start_time"])
-            end_time=datetime(json["end_time"])
+            start_time=datetime.strptime(json["start_time"], '%Y-%m-%d %H:%M:%S')
+            end_time=datetime.strptime(json["end_time"], '%Y-%m-%d %H:%M:%S')
             if request.method=='POST':
                 broadcast_contests_refresh()
-                return service.contest_add(name, task, max_participants_count, start_time, end_time), 200
+                return service.contest_add(name, task, max_participants_count, start_time, end_time).to_dict(), 200
             elif request.method=='PUT':
                 id=int(json["id"])
                 broadcast_contests_refresh()
-                return service.contest_update(id, name, task, max_participants_count, start_time, end_time), 200
+                return service.contest_update(id, name, task, max_participants_count, start_time, end_time).to_dict(), 200
         except Exception as e:
             return str(e), 400
-        
+
     def broadcast_submissions_refresh():
         socketio.emit("submissions-refresh", "ehh")
 
-    @app.route("/contest/page", methods=['GET'])
+    @app.route("/contest/page", methods=['POST'])
     def contest_page():
         try :
             json=request.get_json()
             index=json["index"]
             page_size=json["page_size"]
-            return service.contest_get_page(index, page_size)
+            return [contest_dict_for_basic_user(contest.to_dict()) for contest in service.contest_get_page(index, page_size)]
         except Exception as e:
             return str(e), 400
 
-    @app.route("/submission", methods=['POST'])
+    @app.route("/submit", methods=['POST'])
     # @jwt_required()
     def submission_post():
         try:
-            json=request.get_json()
-            user_id=int(json["user_id"])
-            contest_id=int(json["contest_id"])
-            binary_model=int(json["binary_model"])
+        # if True:
+            user_id = int(request.form.get("user_id"))
+            contest_id = int(request.form.get("contest_id"))
+            binary_model_file = request.files.get("binary_model")
+
+            if binary_model_file:
+                binary_model = binary_model_file.read()
+                print(type(binary_model))
+            else:
+                raise ValueError("No file part")
             broadcast_submissions_refresh()
-            return service.submission_add(user_id, contest_id, binary_model), 200
+            service.submission_add(user_id, contest_id, binary_model)
+            return 'Submission received!', 200
         except Exception as e:
             return str(e), 400
         
@@ -117,7 +136,7 @@ def register_routes(app:Flask, socketio, service):
             json=request.get_json()
             index=json["index"]
             page_size=json["page_size"]
-            return service.submission_get_page(index, page_size)
+            return service.submission_get_page(index, page_size).to_dict()
         except Exception as e:
             return str(e), 400
 
@@ -144,7 +163,8 @@ def register_user_routes(app, socketio, service, db):
                 'message': 'Login Success', 
                 'access_token': access_token,
                 'username':user.username,
-                'user_type':user.user_type
+                'user_type':user.user_type,
+                'id':user._id,
             }
         else:
             return {'message': 'Login Failed'}, 401

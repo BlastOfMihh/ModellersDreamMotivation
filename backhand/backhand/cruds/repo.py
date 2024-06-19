@@ -10,12 +10,12 @@ class Repo:
 
     def submission_add(self,submission):
         self.db.session.add(submission)
-        self.db.commit()
+        self.db.session.commit()
         return submission
     
     def contest_add(self, contest):
         self.db.session.add(contest)
-        self.db.commit()
+        self.db.session.commit()
         return contest
 
     def get_contests_page(self, index, page_size):

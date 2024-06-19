@@ -9,22 +9,23 @@ class Service:
         self.repo=repo
 
     def contest_get(self, id):
-        return Contest.query.filter_by(_id=id)
+        return Contest.query.filter_by(_id=id).first()
     
-    def contest_get_page(self):
+    def contest_get_page(self, index, page_size):
         return self.repo.get_contests_page(index=1, page_size=100)
 
     def contest_add(self, name, task, max_participants_count, start_time, end_time):
-        contest=Contest(self, name, max_participants_count, task, start_time, end_time)
+        contest=Contest(name, max_participants_count, task, start_time, end_time)
         return self.repo.contest_add(contest)
 
     def contest_update(self,id, name, task, max_participants_count, start_time, end_time):
-        contest=Contest(self, name, max_participants_count, task, start_time, end_time)
+        contest=Contest(name, max_participants_count, task, start_time, end_time)
         return self.repo.contest_update(id, contest)
 
 
     def submission_add(self, user_id, contest_id, binary_model):
         submmision=Submission(user_id, contest_id, binary_model)
+        print(submmision)
         return self.repo.submission_add(submmision)
     
     def submission_get_page(self, index=1, page_size=100):
