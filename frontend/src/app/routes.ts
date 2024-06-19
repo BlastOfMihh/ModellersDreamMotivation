@@ -14,6 +14,12 @@ export const routes: Routes = [
         component: ContestPageComponent,
         title: 'Contest'
     },
+    // JUST FOR TESTS
+    {
+        path: 'contest',
+        component: ContestPageComponent,
+        title: 'Contest'
+    },
     {
         path: '',
         redirectTo: '/home',

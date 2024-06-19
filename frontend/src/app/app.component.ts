@@ -9,6 +9,9 @@ import { RouterOutlet } from '@angular/router';
 import { HomePageModule } from './home-page/home-page.module';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarAdminComponent } from './navbar-admin/navbar-admin.component';
+import { ContestPageComponent } from './contestPages/contest-page/contest-page.component';
+
 
 @Component({
   imports: [
@@ -17,6 +20,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     EngineComponent,
     FooterComponent,
     NavbarComponent,
+    NavbarAdminComponent,
+    ContestPageComponent,
     //HomePageComponent,
     HomePageModule,
     RouterOutlet
@@ -25,9 +30,13 @@ import { NavbarComponent } from './navbar/navbar.component';
   standalone: true,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  // in template, if you want to use 
+  // <app-navbar></app-navbar> for simple users
+  // <app-navbar-admin></app-navbar-admin> for manager users
+  
   template:
   `
-    <app-navbar></app-navbar>
+    <app-navbar-admin></app-navbar-admin>
     <router-outlet></router-outlet>
     <app-footer></app-footer>
   `,
@@ -35,3 +44,4 @@ import { NavbarComponent } from './navbar/navbar.component';
 })
 export class AppComponent {
 }
+
