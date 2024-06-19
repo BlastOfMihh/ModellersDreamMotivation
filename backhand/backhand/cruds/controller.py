@@ -1,5 +1,6 @@
 from .exceptions import InvalidMotivation
 from flask import request, Flask
+from flask_cors import cross_origin
 
 from flask import jsonify, session, request, redirect, url_for
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity, get_jwt
@@ -137,6 +138,7 @@ def register_routes(app:Flask, socketio, service):
     from io import BytesIO
     
     @app.route('/model/<submission_id>', methods=['GET'])
+    @cross_origin()
     def get_model(submission_id):
         # Fetch the model from the database
         model=service.get_model(submission_id)
@@ -146,7 +148,7 @@ def register_routes(app:Flask, socketio, service):
             model_io = BytesIO(model)  # replace 'data' with the actual attribute name
     
             # Send the file
-            return send_file(model_io, mimetype='model/gltf+json')
+            return send_file(model_io, mimetype='model/gltf-binary')
         else:
             return 'Model not found', 404
             
