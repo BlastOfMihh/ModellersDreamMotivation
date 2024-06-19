@@ -36,7 +36,7 @@ import { ContestPageComponent } from './contestPages/contest-page/contest-page.c
   
   template:
   `
-    <app-navbar-admin></app-navbar-admin>
+    <app-navbar></app-navbar>
     <router-outlet></router-outlet>
     <app-footer></app-footer>
   `,

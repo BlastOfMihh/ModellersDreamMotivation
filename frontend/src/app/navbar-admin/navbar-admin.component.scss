@@ -11,13 +11,11 @@ nav {
     font-family: 'Roboto', sans-serif;
 }
 
-/* Styling for the logo image */
 .logo {
     height: 80px;
     width: auto;
 }
 
-/* Styling for the navigation links */
 nav ul {
     list-style-type: none;
     display: flex;
@@ -44,7 +42,6 @@ nav ul li a:hover {
     color: #2C74B3;
 }
 
-/* Styling for the profile picture */
 .profile-pic {
     height: 50px;
     width: 50px;
@@ -53,7 +50,6 @@ nav ul li a:hover {
     cursor: pointer;
 }
 
-/* Responsive styling for smaller screens */
 @media only screen and (max-width: 600px) {
     nav ul {
         flex-direction: column;
