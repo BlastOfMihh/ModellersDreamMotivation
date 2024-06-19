@@ -11,7 +11,7 @@ import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NavbarAdminComponent } from './navbar-admin/navbar-admin.component';
 import { ContestPageComponent } from './contestPages/contest-page/contest-page.component';
-
+import { ProfilePageComponent } from './profile-page/profile-page.component';
 
 @Component({
   imports: [
@@ -22,6 +22,7 @@ import { ContestPageComponent } from './contestPages/contest-page/contest-page.c
     NavbarComponent,
     NavbarAdminComponent,
     ContestPageComponent,
+    ProfilePageComponent,
     //HomePageComponent,
     HomePageModule,
     RouterOutlet
@@ -36,7 +37,7 @@ import { ContestPageComponent } from './contestPages/contest-page/contest-page.c
   
   template:
   `
-    <app-navbar></app-navbar>
+    <app-navbar-admin></app-navbar-admin>
     <router-outlet></router-outlet>
     <app-footer></app-footer>
   `,

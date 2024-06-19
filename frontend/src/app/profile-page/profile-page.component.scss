@@ -1,0 +1,127 @@
+.container {
+    display: flex;
+    padding: 20px;
+    gap: 20px; /* space between the sidebar and the main content */
+}
+
+.sidebar {
+    flex: 1;
+    background-color: #f1eeee; /* light gray */
+    border-radius: 10px; /* rounded corners */
+    padding: 20px; /* space between the border and the content */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* a subtle shadow */
+    font-family: 'Roboto', sans-serif;
+}
+
+.main-content {
+    flex: 3;
+    background-color: #f1eeee; /* light gray */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    font-family: 'Roboto', sans-serif;
+}
+
+.user-info-li {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding: 15px;
+    transition: background-color 0.2s ease;
+    color: #2A3137;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif; // Add this line
+}
+
+.user-settings-button, .user-delete-account-button {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding: 15px;
+    transition: background-color 0.2s ease;
+    color: #2A3137;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    background: none;
+    cursor: pointer;
+    outline: inherit;
+    font-size: 16px;
+}
+
+.user-delete-account-button {
+    color: red;
+}
+
+.logout-button {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #dad8da; /* Change border color */
+    padding: 15px;
+    border-radius: 7px;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease; /* Add box-shadow to transition */
+    color: #2A3137; /* Change text color back to dark for better contrast */
+    font-weight: bold;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    background-color: #dedee1; /* Change background color */
+    cursor: pointer;
+    outline: inherit;
+    font-size: 16px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1); /* Add a slight box-shadow */
+    
+    &:hover {
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Increase box-shadow on hover */
+        background-color: #bcbabe; /* Darken background color on hover */
+    }
+}
+
+.user-statistics-li {
+    font-family: Roboto, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding: 15px;
+    transition: background-color 0.2s ease;
+    color: #2A3137;
+    text-decoration: none;
+    font-size: 16px;
+
+    &:hover {
+        background-color: #C7C8CC;
+        color: #205295;
+    }
+}
+
+.last-contest-li {
+    font-family: Roboto, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding: 15px;
+    transition: background-color 0.2s ease;
+    color: #2A3137;
+    text-decoration: none;
+    font-size: 16px;
+
+    &:hover {
+        background-color: #C7C8CC;
+        color: #205295;
+    }
+}
+
+.model-li {
+    font-family: Roboto, sans-serif;
+    font-weight: bold;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    transition: background-color 0.2s ease;
+    color: #2A3137;
+    text-decoration: none;
+    font-size: 24px;
+}
+

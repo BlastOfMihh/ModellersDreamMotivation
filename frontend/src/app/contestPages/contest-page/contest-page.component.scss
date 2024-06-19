@@ -6,8 +6,16 @@
     height: calc(100vh - headerHeight - footerHeight);
     font-family: 'Roboto', sans-serif;
     font-size: 1em;
-    margin-left: 100px;
-    margin-right: 100px;
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    flex: 3;
+    background-color: #f1eeee; /* light gray */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    font-family: 'Roboto', sans-serif;
 }
 
 .card-header {
@@ -141,5 +149,36 @@
 }
 
 .view-submissions-btn:hover {
+    background-color: #144272;
+}
+
+.score-group {
+    margin-top: 20px;
+}
+
+.voting-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.voting-btn {
+    border: none;
+    background-color: #2C74B3;
+    color: white;
+    font-size: 0.8vw;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 7px;
+    margin-top : 10px;
+    width: auto;
+    height: 4vh;
+    min-width: fit-content;
+    white-space: nowrap;
+}
+
+.voting-btn:hover {
     background-color: #144272;
 }
