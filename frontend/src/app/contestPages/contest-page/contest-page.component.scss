@@ -1,0 +1,80 @@
+.contest-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - headerHeight - footerHeight);
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.card-header {
+    /* Your styles here */
+    margin-bottom: 0;
+}
+
+.card-subtitle-host {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #6c757d;
+    font-size: 16px;
+}
+
+.card-subtitle-state {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #6c757d;
+    font-size: 16px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.middle-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.card-title {
+    font-size: 2em;
+}
+
+.card-subtitle {
+    font-size: 1.5em;
+}
+
+.submissions-score-section {
+    display: flex;
+    flex-direction: row; /* Stack items vertically */
+    justify-content: center; /* Align items to the start */
+    align-items: flex-start; /* Align items to the start on the cross axis */
+    width: 100%;
+}
+
+.duration-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+}

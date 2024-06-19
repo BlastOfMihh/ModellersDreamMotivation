@@ -3,3 +3,35 @@
 <input type="file" id="file" (change)="onFileSelected($event)">
 <br>
 <button (click)="onSubmit()">Submit</button>
+<div class="contest-container">
+    <div class="contest-card">
+      <div class="card-header">
+        <h1 class="card-title">{{ contest.name }}</h1>
+        <h2 class="card-subtitle-host text-muted">Hosted by: {{ contest.host }}</h2>
+        <h2 class="card-subtitle-state text-muted">State: {{ contest.state }}</h2>
+      </div>
+      <div class="card-body">
+        <div class="middle-section">
+          <h2 class="card-subtitle mb-2 text-muted">Description</h2>
+          <p class="card-text">{{ contest.description }}</p>
+          <h2 class="card-subtitle mb-2 text-muted">Task</h2>
+          <p class="card-text">{{ contest.task.title }}</p>
+          <p class="card-text">{{ contest.task.description }}</p>
+          <h2 class="card-subtitle mb-2 text-muted">Participants </h2>
+          <p class="card-text-participants">{{ contest.participants }} / {{ contest.maximumParticipants }}</p>
+          <div class="submissions-score-section">
+            <h2 class="card-subtitle mb-2 text-muted">Submissions</h2>
+            <p class="card-text-submissions">{{ contest.submissions }}</p>
+            <h2 class="card-subtitle mb-2 text-muted">Maximum Current Score</h2>
+            <p class="card-text-rating">{{ contest.maxRating }}</p>
+          </div>
+          <div class="duration-section">
+            <h2 class="card-subtitle mb-2 text-muted">Start Time</h2>
+            <p class="card-text-start-time">{{ contest.startTime }}</p>
+            <h2 class="card-subtitle mb-2 text-muted">Duration</h2>
+            <p class="card-text-minutes">{{ contest.duration }} minutes</p>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,114 @@
+.container {
+    display: flex;
+    padding: 20px;
+    gap: 20px; /* space between the sidebar and the main content */
+}
+
+.sidebar {
+    flex: 1;
+    background-color: #f1eeee; /* light gray */
+    border-radius: 10px; /* rounded corners */
+    padding: 20px; /* space between the border and the content */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* a subtle shadow */
+    font-family: 'Roboto', sans-serif;
+}
+
+.main-content {
+    flex: 3;
+    background-color: #f1eeee; /* light gray */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    font-family: 'Roboto', sans-serif;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding: 15px;
+    transition: background-color 0.2s ease;
+    color: #2A3137;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif; // Add this line
+}
+
+li:hover {
+    background-color: #C7C8CC;
+    color: #205295;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Roboto', sans-serif;
+    color: #27374D;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 16px;
+    color: #2A3137; 
+}
+
+tr {
+    transition: background-color 0.2s ease;
+}
+
+tr:nth-child(even) {
+    background-color: #dcdbdf;
+}
+
+tr:nth-child(odd) {
+    background-color: #f1eeee;
+}
+
+th {
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 18px;
+    border: none;
+    color: #27374D;
+}
+
+td {
+    border-top: 0.5px solid #bababa;
+    border-bottom: 0.5px solid #bababa;
+    border-left: none;
+    border-right: none;
+}
+
+.user-cell {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-weight: 600;
+    color: #144272;
+}
+
+.user-cell:hover {
+    color: #2C74B3;
+}
+
+.view-all-text {
+    color: #000000; // Change this to your desired color
+    font-weight: 550;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif; // Add this line
+}
+
+.view-all-text:hover {
+    color: #28435b; // Change this to your desired hover color
+}

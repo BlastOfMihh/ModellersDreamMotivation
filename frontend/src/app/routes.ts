@@ -4,8 +4,14 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { ContestPageComponent } from './contestPages/contest-page/contest-page.component';
 import {AdminPanelComponent} from "./admin/admin-panel/admin-panel.component";
 import { LoginPageComponent } from './login-page/login-page.component';
+import { AuthGuard } from './auth-guard';
 
 export const routes: Routes = [
+  {
+    path:'login',
+    component:LoginPageComponent,
+    title:'You ready?'
+  },
   {
     path: 'home',
     component: HomePageComponent,
@@ -22,13 +28,9 @@ export const routes: Routes = [
     title:'Admin Panel'
   },
   {
-    path:'login',
-    component:LoginPageComponent,
-    title:'You ready?'
-  },
-  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'
+    // ,canActivate: [AuthGuard]
   },
 ];

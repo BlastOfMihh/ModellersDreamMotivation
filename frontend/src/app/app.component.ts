@@ -3,14 +3,18 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { EngineComponent } from './engine/engine.component';
 import { UiComponent } from './ui/ui.component';
 import { ViewModelComponent } from './model-display/model-display.component';
-import { NgFor } from '@angular/common';
-import {HomePageComponent} from "./home-page/home-page.component";
 import { RouterOutlet, provideRouter } from '@angular/router';
-import { routes } from './routes';
 import {ServerUrls} from "./urls";
 import {Injectable} from "@angular/core";
 import { Socket , SocketIoModule} from 'ngx-socket-io';
 import { ContestService } from './services/contest.service';
+
+import { HomePageModule } from './home-page/home-page.module';
+import { FooterComponent } from './footer/footer.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarAdminComponent } from './navbar-admin/navbar-admin.component';
+import { ContestPageComponent } from './contestPages/contest-page/contest-page.component';
+
 
 @Injectable()
 export class SocketOne extends Socket {
@@ -24,21 +28,30 @@ export class SocketOne extends Socket {
     ViewModelComponent,
     UiComponent,
     EngineComponent,
-    HomePageComponent,
+    FooterComponent,
+    NavbarComponent,
+    NavbarAdminComponent,
+    ContestPageComponent,
+    //HomePageComponent,
+    HomePageModule,
     RouterOutlet
   ],
   selector: 'app-root',
   standalone: true,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  // in template, if you want to use 
+  // <app-navbar></app-navbar> for simple users
+  // <app-navbar-admin></app-navbar-admin> for manager users
+  
   template:
   `
-    <h1>
-    this is it
-    </h1>
+    <app-navbar-admin></app-navbar-admin>
     <router-outlet></router-outlet>
+    <app-footer></app-footer>
   `,
   providers: [SocketOne, ContestService]
 })
 export class AppComponent {
 }
+

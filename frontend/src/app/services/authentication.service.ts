@@ -4,6 +4,7 @@ import {Contest} from "../domain/contest";
 import {ServerUrls} from "../urls";
 import {IUserData} from "../domain/user-data";
 import {UserType} from "../domain/user";
+import axios from "axios";
 
 @Injectable({
   providedIn: 'root'
@@ -35,4 +36,11 @@ export class AuthenticationService {
     }
     return false
   }
+  // isAuth(){
+  //   axios.get(ServerUrls.base + "/",
+  //     { headers:
+  //         { Authorization: `Bearer ${localStorage.getItem('jwt_token')}` } 
+  //     }
+  //   )
+  // }
 }

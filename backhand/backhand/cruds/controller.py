@@ -46,6 +46,7 @@ def get_user_type():
 
 def register_routes(app:Flask, socketio, service):
     @app.route("/", methods=['GET'])
+    @jwt_required()
     def ping():
         return "connection working"
     
