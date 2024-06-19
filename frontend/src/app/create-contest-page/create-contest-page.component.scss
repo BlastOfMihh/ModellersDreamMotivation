@@ -1,0 +1,184 @@
+.contest-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - headerHeight - footerHeight);
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    flex: 3;
+    background-color: #f1eeee; /* light gray */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    font-family: 'Roboto', sans-serif;
+}
+
+.card-header {
+    margin-bottom: 0;
+}
+
+.card-subtitle-host {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #6c757d;
+    font-size: 16px;
+}
+
+.card-subtitle-state {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #6c757d;
+    font-size: 16px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0.5em 0;
+}
+
+.middle-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.card-title {
+    font-size: 2em;
+}
+
+.card-subtitle {
+    font-size: 1.5em;
+}
+
+.participants-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.participants-title {
+    font-size: 1.2em;
+    font-family: 'Roboto', sans-serif;
+}
+
+.card-text-participants {
+    font-size: 1.05em;
+    font-weight: bold;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.submissions-score-section {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center; 
+    align-items: flex-start;
+    width: 100%;
+}
+
+.start-time-title {
+    font-size: 1.2em;
+    font-family: 'Roboto', sans-serif;
+}
+
+.card-text-start-time {
+    font-size: 1em;
+    font-family: 'Roboto', sans-serif;
+}
+
+.duration-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+}
+
+.duration-title {
+    font-size: 1.2em;
+    font-family: 'Roboto', sans-serif;
+}
+
+.card-text-minutes {
+    font-size: 1em;
+    font-family: 'Roboto', sans-serif;
+}
+
+.card-text-submissions {
+    font-weight: bold;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.view-submissions-btn {
+    border: none;
+    background-color: #2C74B3;
+    color: white;
+    font-size: 0.8vw;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 7px;
+    margin-top : 10px;
+    width: auto;
+    height: 4vh;
+    min-width: fit-content;
+    white-space: nowrap;
+}
+
+.view-submissions-btn:hover {
+    background-color: #144272;
+}
+
+.score-group {
+    margin-top: 20px;
+}
+
+.voting-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.voting-btn {
+    border: none;
+    background-color: #2C74B3;
+    color: white;
+    font-size: 0.8vw;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 7px;
+    margin-top : 10px;
+    width: auto;
+    height: 4vh;
+    min-width: fit-content;
+    white-space: nowrap;
+}
+
+.voting-btn:hover {
+    background-color: #144272;
+}

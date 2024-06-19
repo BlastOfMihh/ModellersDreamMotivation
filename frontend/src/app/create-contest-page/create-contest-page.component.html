@@ -1,0 +1,54 @@
+<div class="contest-container">
+    <div class="contest-card">
+      <div class="card-header">
+        <h2 class="card-subtitle mb-2 text-muted">Contest Name</h2>
+        <h1 class="card-title-name">
+            <input [(ngModel)]="contest.name" name="name" placeholder="Contest Name">
+        </h1>
+        <!-- <h2 class="card-subtitle-state text-muted">State: {{ contest.state }}</h2> -->
+      </div>
+      <div class="card-body">
+        <div class="middle-section">
+          <h2 class="card-subtitle mb-2 text-muted">Description</h2>
+          <input [(ngModel)]="contest.description" name="description" placeholder="Contest Description">
+          <!-- <p class="card-text">{{ contest.description }}</p> -->
+          <div class="task-section">
+            <h2 class="card-subtitle mb-2 text-muted">Task</h2>
+            <input [(ngModel)]="contest.task.description" name="taskDescription" placeholder="Task Description">
+            <!-- <p class="card-text">{{ contest.task.title }}</p> -->
+            <!-- <p class="card-text">{{ contest.task.description }}</p> -->
+          </div>
+          <div class="participants-section"> 
+            <!-- <h2 class="participants-title">Participants</h2> -->
+            <!-- <p class="card-text-participants">{{ contest.participants }} / {{ contest.maximumParticipants }}</p> -->
+          </div>
+          <div class="duration-section">
+            <!-- <h2 class="start-time-title">Start Time</h2> -->
+            <!-- <p class="card-text-start-time">{{ contest.startTime }}</p> -->
+            <!-- <h2 class="duration-title">Duration</h2> -->
+            <!-- <p class="card-text-minutes">{{ contest.duration }} minutes</p> -->
+          </div>
+          <div class="submissions-score-section">
+            <div class="submissions-group">
+              <h2 class="card-subtitle mb-2 text-muted">Submissions</h2>
+              <!-- <p class="card-text-submissions">{{ contest.submissions }}</p> -->
+              <!-- <a href="/view-submissions/0">   -->
+                <!--  0 este id-ul contest-ului -->
+                <!-- <button class="view-submissions-btn">View Submissions</button> -->
+              <!-- </a> -->
+            </div>
+          </div>
+          <div class="score-group">
+            <h2 class="card-subtitle mb-2 text-muted">Maximum Current Score</h2>
+            <!-- <p class="card-text-rating">{{ contest.maxRating }}</p> -->
+          </div>
+          <div class="voting-section">
+            <!-- <h2 class="voting-title"></h2> -->
+            <a href="/submit/create-contest/0">  <!--  0 este id-ul contest-ului -->
+              <button class="submit">Submit</button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ContestPageComponent } from './contestPages/contest-page/contest-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { CreateContestPageComponent } from './create-contest-page/create-contest-page.component';
 
 export const routes: Routes = [
     {
@@ -25,6 +26,11 @@ export const routes: Routes = [
         path: 'profile/:id',
         component: ProfilePageComponent,
         title: 'Profile'
+    },
+    {
+        path: "create-contest",
+        component: CreateContestPageComponent,
+        title: 'Create contest'
     },
     {
         path: '',
