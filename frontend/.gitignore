@@ -1,5 +1,13 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# python cache
+
+/backhand/backhand/__pycache__
+/backhand/backhand/cruds/__pycache__
+/backhand/backhand/cruds/domain/__pycache__
+/backhand/instance
+
+
 # Compiled output
 /dist
 /tmp
