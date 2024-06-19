@@ -1,5 +1,6 @@
 from .exceptions import InvalidMotivation
-from flask import request, Flask
+from flask import request, Flask, send_file
+from io import BytesIO
 from flask_cors import cross_origin
 
 from flask import jsonify, session, request, redirect, url_for
@@ -11,8 +12,8 @@ from flask_socketio import send, emit
 from .domain.user_types import UserTypes
 
 from .domain.user import User
-from .domain.contest import Contest, ContestStates
-from .domain.submission import Submission
+
+from .domain.contest import ContestStates
 
 from datetime import datetime
 
@@ -35,6 +36,13 @@ def admin_only_decorator(func):
         return "User is not an Admin", 443
     wrapper.__name__ = func.__name__
     return wrapper
+
+def get_user_id():
+    invoker=get_jwt_identity()
+    return int(invoker['id']) 
+def get_user_type():
+    invoker=get_jwt_identity()
+    return int(invoker['user_type']) 
 
 def register_routes(app:Flask, socketio, service):
     @app.route("/", methods=['GET'])
@@ -101,13 +109,28 @@ def register_routes(app:Flask, socketio, service):
     def broadcast_submissions_refresh():
         socketio.emit("submissions-refresh", "ehh")
 
+
     @app.route("/contest/page", methods=['POST'])
     def contest_page():
         try :
             json=request.get_json()
             index=json["index"]
             page_size=json["page_size"]
-            return [contest_dict_for_basic_user(contest.to_dict()) for contest in service.contest_get_page(index, page_size)]
+            answer=[]
+            contest_page=service.contest_get_page(index, page_size)
+            for contest in contest_page:
+                answer.append(contest_dict_for_basic_user(contest.to_dict()))
+            return answer
+        except Exception as e:
+            return str(e), 400
+        
+    @app.route("/enroll", methods=['POST'])
+    def participants_post():
+        try:
+            json=request.get_json()
+            user_id=get_user_id()
+            contest_id=int(json["contest_id"])
+            return service.participant_add(user_id,contest_id)
         except Exception as e:
             return str(e), 400
 
@@ -116,26 +139,59 @@ def register_routes(app:Flask, socketio, service):
     def submission_post():
         try:
         # if True:
-            user_id = int(request.form.get("user_id"))
+            user_id = get_user_id()
             contest_id = int(request.form.get("contest_id"))
             binary_model_file = request.files.get("binary_model")
 
-            if binary_model_file:
-                binary_model = binary_model_file.read()
-                print(type(binary_model))
+            contest=service.contest_get(contest_id)
+            if contest.get_state()==ContestStates.RUNNING:
+                if binary_model_file:
+                    binary_model = binary_model_file.read()
+                    print(type(binary_model))
+                else:
+                    raise ValueError("No file part")
+                broadcast_submissions_refresh()
+                service.submission_add(user_id, contest_id, binary_model)
+                return 'Submission received!', 200
             else:
-                raise ValueError("No file part")
-            broadcast_submissions_refresh()
-            service.submission_add(user_id, contest_id, binary_model)
-            return 'Submission received!', 200
+                raise Exception("Contest is not running")
         except Exception as e:
             return str(e), 400
         
-    from flask import send_file
-    import os
+    @app.route("submission/<contest_id>", methods=['GET'])
+    @jwt_required()
+    def submission_get_by_user_id(contest_id):
+        try:
+            user_id=get_user_id()
+            contest_id=int(contest_id)
+            return service.get_user_submissions(user_id, contest_id)
+        except Exception as e:
+            return str(e), 400
+    
+    @app.route("vote", methods=['POST'])
+    @jwt_required()
+    def vote():
+        try:
+            json=request.get_json()
+            user_id=get_user_id()
+            contest_id=int(contest_id)
+            grade=int(json["grade"])
+            to_user_id=int(json["to_user_id"])
+            return service.user_vote(user_id, to_user_id, contest_id, grade)
+        except Exception as e:
+            return str(e), 400
 
-    from flask import send_file
-    from io import BytesIO
+    @app.route("submission/page", methods=['GET'])
+    @manager_only_decorator
+    @jwt_required()
+    def submission_get_by_user_id():
+        try:
+            
+            return service.get_user_submissions(None)
+        except Exception as e:
+            return str(e), 400
+        
+
     
     @app.route('/model/<submission_id>', methods=['GET'])
     @cross_origin()
@@ -202,7 +258,7 @@ def register_user_routes(app, socketio, service, db):
             new_user = User(username=username, user_type=user_type, password=password, rank=0)
             db.session.add(new_user)
             db.session.commit()
-            return 'registerd'
+            return 'registered'
         except Exception as e:
             return str(e), 404
 

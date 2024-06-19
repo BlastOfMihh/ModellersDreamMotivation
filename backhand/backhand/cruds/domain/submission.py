@@ -1,6 +1,8 @@
 from backhand import db
 
-from sqlalchemy import ForeignKey, Integer, BLOB
+from datetime import datetime
+
+from sqlalchemy import ForeignKey, Integer, BLOB, DateTime
 from sqlalchemy.orm import Mapped , mapped_column , DeclarativeBase , relationship
 
 class Submission(db.Model):
@@ -13,22 +15,24 @@ class Submission(db.Model):
     user_id: Mapped[int] = mapped_column(ForeignKey("users._id"))
     contest_id: Mapped[int] = mapped_column(ForeignKey("contests._id"))
     binary_model = db.Column(db.LargeBinary, nullable=False)
+    time:Mapped[datetime] = mapped_column(DateTime, nullable=False)
     
     # user: Mapped["User"] = relationship(back_populates="contests")
     # contest: Mapped["Contest"] = relationship(back_populates="users")
-
 
     def __init__(self, user_id, contest_id, binary_model):
         self.user_id = user_id
         self.contest_id = contest_id
         self.binary_model = binary_model
+        self.time=datetime.now
 
     def to_dict(self):
         return {
             'id': self._id,
             'user_id': self.user_id,
             'contest_id': self.contest_id,
-            'binary_model': self.binary_model
+            'binary_model': self.binary_model,
+            'time': self.time
         }
 
     def __repr__(self):

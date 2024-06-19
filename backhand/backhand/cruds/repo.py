@@ -2,11 +2,16 @@ from faker import Faker
 from .domain.user import User
 from .domain.contest import Contest
 from .domain.submission import Submission
+from .domain.participant import Participant
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import desc, and_
 
 class Repo:
     def __init__(self, db:SQLAlchemy) -> None:
         self.db=db
+
+    def contest_get(id):
+        return Contest.query.filter_by(_id=id).first()
 
     def submission_add(self,submission):
         self.db.session.add(submission)
@@ -36,6 +41,19 @@ class Repo:
     def get_model(self, submission_id):
         submission=self.db.session.query(Submission).filter(Submission._id == submission_id).one()
         return submission.binary_model
+    
+    def participant_add(self, user_id, contest_id):
+        participant=Participant(user_id, contest_id)
+        self.db.session.add(participant)
+        self.db.session.commit()
+
+    def get_user_submissions(self, user_id, contest_id):
+        if user_id is not None:
+            submissions=self.db.session.query(Submission).filter(and_(Submission.user_id==user_id, Submission.contest_id==contest_id)).order_by(desc(Submission.time))
+        else :
+            submissions=self.db.session.query(Submission).order_by(desc(Submission.time))
+        return submissions
+
     #users code
     def add_user(self, user):
         self.db.session.add(user)
