@@ -1,13 +1,13 @@
-<p>contest-page works!</p>
 <app-view-model></app-view-model>
 <input type="file" id="file" (change)="onFileSelected($event)">
+
 <br>
 <button (click)="onSubmit()">Submit</button>
 <div class="contest-container">
     <div class="contest-card">
       <div class="card-header">
         <h1 class="card-title">{{ contest.name }}</h1>
-        <h2 class="card-subtitle-host text-muted">Hosted by: {{ contest.host }}</h2>
+        <!-- <h2 class="card-subtitle-host text-muted">Hosted by: {{ contest.host }}</h2> -->
         <h2 class="card-subtitle-state text-muted">State: {{ contest.state }}</h2>
       </div>
       <div class="card-body">
@@ -15,8 +15,9 @@
           <h2 class="card-subtitle mb-2 text-muted">Description</h2>
           <p class="card-text">{{ contest.description }}</p>
           <h2 class="card-subtitle mb-2 text-muted">Task</h2>
-          <p class="card-text">{{ contest.task.title }}</p>
-          <p class="card-text">{{ contest.task.description }}</p>
+          <!-- <p class="card-text">{{ contest.task.title }}</p> -->
+          <!-- <p class="card-text">{{ contest.task.description }}</p> -->
+          <p class="card-text">{{ contest.task}}</p>
           <h2 class="card-subtitle mb-2 text-muted">Participants </h2>
           <p class="card-text-participants">{{ contest.participants }} / {{ contest.maximumParticipants }}</p>
           <div class="submissions-score-section">

@@ -3,6 +3,7 @@ export interface Contest{
   startTime:Date,
   endTime:Date,
   max_participants:number,
+  description:string,
   task:string,
   state:string,
 }
