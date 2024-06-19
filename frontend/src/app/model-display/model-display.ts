@@ -1,5 +1,6 @@
 import { ElementRef, Injectable, NgZone, OnDestroy } from '@angular/core';
 import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 @Injectable({ providedIn: 'root' })
 export class EngineService implements OnDestroy {
@@ -12,6 +13,8 @@ export class EngineService implements OnDestroy {
   private cube: THREE.Mesh;
 
   private frameId: number = null;
+
+  private controls
 
   public constructor(private ngZone: NgZone) {
   }
@@ -38,20 +41,31 @@ export class EngineService implements OnDestroy {
     this.scene.add(this.camera);
 
     // soft white light
-    this.light = new THREE.AmbientLight(0x404040, 5);
-    this.scene.add(this.light);
 
     let directionalLight = new THREE.PointLight(0xffffff, 15);
     directionalLight.position.set(0, 1.5, 2);
     this.scene.add(directionalLight);
 
+    let lightUnder = new THREE.PointLight(0xffffff, 40);
+    lightUnder.position.set(0, -4, -5);
+    this.scene.add(lightUnder);
+
+    // Add an ambient light
+    let ambientLight = new THREE.AmbientLight(0x404040,1); // soft white light
+    this.scene.add(ambientLight);
 
     const geometry = new THREE.BoxGeometry(1, 2, 1);
     const material = new THREE.MeshStandardMaterial({color: 0x00ff00});
     this.cube = new THREE.Mesh(geometry, material);
     this.cube.position.set(0,0,0)
 
-    this.scene.add( this.cube);
+    // this.scene.add( this.cube);
+
+    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+  }
+
+  public addToScene(model){
+    this.scene.add(model);
   }
 
   public animate(): void {

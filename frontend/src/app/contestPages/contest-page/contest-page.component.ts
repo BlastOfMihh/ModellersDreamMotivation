@@ -2,11 +2,12 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { ActivatedRoute } from '@angular/router';
 import { inject } from '@angular/core';
 import {ContestService} from "../../services/contest.service";
+import { ViewModelComponent } from 'src/app/model-display/model-display.component';
 
 @Component({
   selector: 'app-contest-page',
   standalone: true,
-  imports: [],
+  imports: [ViewModelComponent],
   templateUrl: './contest-page.component.html',
   styleUrl: './contest-page.component.scss',
   encapsulation: ViewEncapsulation.None,
