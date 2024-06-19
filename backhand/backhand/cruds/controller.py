@@ -159,7 +159,7 @@ def register_routes(app:Flask, socketio, service):
         except Exception as e:
             return str(e), 400
         
-    @app.route("submission/<contest_id>", methods=['GET'])
+    @app.route("/submission/<contest_id>", methods=['GET'])
     @jwt_required()
     def submission_get_by_user_id(contest_id):
         try:
@@ -169,7 +169,7 @@ def register_routes(app:Flask, socketio, service):
         except Exception as e:
             return str(e), 400
     
-    @app.route("vote", methods=['POST'])
+    @app.route("/vote", methods=['POST'])
     @jwt_required()
     def vote():
         try:
@@ -182,12 +182,11 @@ def register_routes(app:Flask, socketio, service):
         except Exception as e:
             return str(e), 400
 
-    @app.route("submission/page", methods=['GET'])
+    @app.route("/submission/page", methods=['GET'])
     @manager_only_decorator
     @jwt_required()
-    def submission_get_by_user_id():
+    def submission_get_all():
         try:
-            
             return service.get_user_submissions(None)
         except Exception as e:
             return str(e), 400
