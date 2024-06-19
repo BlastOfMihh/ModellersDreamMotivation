@@ -14,7 +14,8 @@ import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NavbarAdminComponent } from './navbar-admin/navbar-admin.component';
 import { ContestPageComponent } from './contestPages/contest-page/contest-page.component';
-
+import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { CreateContestPageComponent } from './create-contest-page/create-contest-page.component';
 
 @Injectable()
 export class SocketOne extends Socket {
@@ -32,6 +33,8 @@ export class SocketOne extends Socket {
     NavbarComponent,
     NavbarAdminComponent,
     ContestPageComponent,
+    ProfilePageComponent,
+    CreateContestPageComponent,
     //HomePageComponent,
     HomePageModule,
     RouterOutlet

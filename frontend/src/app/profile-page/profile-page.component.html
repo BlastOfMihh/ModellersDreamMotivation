@@ -1,0 +1,111 @@
+
+<!-- <html>
+<head>
+    <title>3D Building Contests</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>3D Building Contests</h1>
+    </header>
+    <main>
+        <section id="contests">
+            <h2>Current Contests</h2>
+        
+        </section>
+        <section id="submit">
+            <h2>Submit Your Design</h2>
+        
+        </section>
+    </main>
+    <footer>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html> -->
+
+<!-- <p>home-page works!</p> -->
+<main class="container">
+    <section class="sidebar">
+        <div class="user-info">
+            <h2>User Info</h2>
+            <ul>
+                <li class="user-info-li"> <b> Username </b> {{ user.username }} </li>
+                <li class="user-info-li"> <b> Email </b> {{ user.email }} </li>
+                <li class="user-info-li"> <b> Rating </b> {{ user.rating }} </li>
+                <!-- <li class="user-info-li"> <b> Contests Won </b> {{ user.contestsWon }} </li>
+                <li class="user-info-li"> <b> Total Contests </b> {{ user.contests }} </li>
+                <li class="user-info-li"> <b> Contests Hosted </b> {{ user.createdContests }} </li>
+                <li class="user-info-li"> <b> Total Submissions </b> {{ user.submissions }} </li>
+                <li class="user-info-li"> <b> Last Submission </b> {{ user.lastSubmission.time }} </li> -->
+            </ul>
+        </div>
+        <div class="user-settings">
+            <ul>
+                <a href="/logout">
+                <button class="logout-button">Logout</button>
+                </a>
+            </ul>
+            <h2>User Settings</h2>
+            <ul>
+                <button class="user-settings-button">Edit Profile</button>
+                <button class="user-settings-button">Change Password</button>
+                <button class="user-settings-button">Modify Account Data</button>
+                <button class="user-delete-account-button">Delete Account</button>
+            </ul>
+        </div>
+    </section>
+
+    <section class="main-content">
+        <h2>User Statistics</h2>
+        <li class="user-statistics-li"> <b> Contests Won </b> {{ user.contestsWon }} </li>
+        <li class="user-statistics-li"> <b> Contests Hosted </b> {{ user.createdContests }} </li>
+        <li class="user-statistics-li"> <b> Last Submission Date </b> {{ user.lastSubmission.time }} </li>
+        <li class="user-statistics-li"> <b> Total Contests </b> {{ user.contests }} </li>
+        <li class="user-statistics-li"> <b> Total Submissions </b> {{ user.submissions }} </li>
+        
+        <h2> Last Contest </h2>
+        <li class="last-contest-li"> <b> Contest Name : {{ user.lastSubmission.contestName }}</b></li>
+        <li class="last-contest-li"> <b> Submission Rating : {{ user.lastSubmission.contestRating }}</b></li>
+        <li class="last-contest-li"> <b> Submission Date : {{ user.lastSubmission.time }}</b></li>
+        
+        <li class="model-li"> 3D Model: </li>
+        <li class="last-contest-li"> Insert 3d model here >> </li>
+        
+        <h2>All User Submissions</h2>
+        <table>
+            <thead>
+              <tr>
+                <th>Submission Id</th>
+                <th>Contest Id</th>
+                <th>Status</th>
+                <th>Time</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> {{ submission1.id }} </td>
+                    <td> {{ submission1.contestId }} </td>
+                    <td> {{ submission1.status }} </td>
+                    <td> {{ submission1.time }} </td>
+                </tr>
+                <tr>
+                    <td> {{ submission2.id }} </td>
+                    <td> {{ submission2.contestId }} </td>
+                    <td> {{ submission2.status }} </td>
+                    <td> {{ submission2.time }} </td>
+                </tr>
+                <tr>
+                    <td> {{ submission3.id }} </td>
+                    <td> {{ submission3.contestId }} </td>
+                    <td> {{ submission3.status }} </td>
+                    <td> {{ submission3.time }} </td>
+                </tr>
+            </tbody>
+          </table>
+        <!-- Ranking entries will go here -->
+    </section>
+</main>
+<footer>
+    <!-- Footer information goes here -->
+</footer>

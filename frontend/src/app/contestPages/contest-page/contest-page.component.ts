@@ -42,6 +42,11 @@ export class ContestPageComponent {
     description: 'This is a mock contest. It is for testing purposes. It is not real. Current contest is hosted by Laura and please follow her rules. Thank you! Also, this is a long description to test the overflow of the description. This is a mock contest. It is for testing purposes. It is not real. Current contest is hosted by Laura and please follow her rules. Thank you! Also, this is a long description to test the overflow of the description. This is a mock contest. It is for testing purposes. It is not real. Current contest is hosted by Laura and please follow her rules. Thank you! Also, this is a long description to test the overflow of the description.',
     startTime: '2021-01-01 00:02:00',
     duration: 60,
+    votes: {
+      status: 'not opened yet',
+      //up: 10,
+      //down: 5,
+    },
     task: {
       id: 1,
       title: 'Mock Task',
