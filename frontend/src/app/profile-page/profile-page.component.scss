@@ -125,6 +125,19 @@
     font-size: 24px;
 }
 
+a.logout-button {
+    text-decoration: none;
+    color: inherit;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #dedee1;
+    border: 1px solid #dad8da;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    font-family: 'Roboto', sans-serif;  
+}
 
 table {
     width: 100%;
