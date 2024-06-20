@@ -60,7 +60,7 @@ def register_routes(app:Flask, socketio, service):
         return contest_dict
 
     @app.route("/contest/<id>", methods=['GET'])
-    # @jwt_required()
+    @jwt_required()
     def contest_get(id):
         try:
             id=int(id)
@@ -76,8 +76,8 @@ def register_routes(app:Flask, socketio, service):
             return str(e), 400
 
     @app.route("/contest/<id>", methods=['DELETE'])
-    # @manager_only_decorator
-    # @jwt_required()
+    @manager_only_decorator
+    @jwt_required()
     def contest_delete(id):
         try:
             id=int(id)
@@ -112,6 +112,7 @@ def register_routes(app:Flask, socketio, service):
 
 
     @app.route("/contest/page", methods=['POST'])
+    @jwt_required()
     def contest_page():
         try :
             json=request.get_json()
@@ -126,6 +127,7 @@ def register_routes(app:Flask, socketio, service):
             return str(e), 400
         
     @app.route("/enroll", methods=['POST'])
+    @jwt_required()
     def participants_post():
         try:
             json=request.get_json()
@@ -194,7 +196,8 @@ def register_routes(app:Flask, socketio, service):
 
     
     @app.route('/model/<submission_id>', methods=['GET'])
-    @cross_origin()
+    # @jwt_required()
+    # @cross_origin()
     def get_model(submission_id):
         # Fetch the model from the database
         model=service.get_model(submission_id)
@@ -209,6 +212,7 @@ def register_routes(app:Flask, socketio, service):
             return 'Model not found', 404
             
     @app.route("/submission/page", methods=['GET'])
+    @jwt_required()
     def submission_page():
         try :
             json=request.get_json()

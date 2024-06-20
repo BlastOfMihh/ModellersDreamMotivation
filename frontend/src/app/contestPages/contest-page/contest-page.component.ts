@@ -6,7 +6,9 @@ import { ViewModelComponent } from 'src/app/model-display/model-display.componen
 import {HttpClient} from "@angular/common/http";
 import { CommonModule } from '@angular/common'; // import CommonModule
 import { TemplateRef, ViewChild } from '@angular/core';
-
+import { Contest, ContestStates } from 'src/app/domain/contest';
+import { rejects } from 'assert';
+import { Submission } from 'src/app/domain/submission';
 
 @Component({
   selector: 'app-contest-page',
@@ -20,65 +22,27 @@ import { TemplateRef, ViewChild } from '@angular/core';
 
 // JUST FOR TESTSSSSSSS : 
 export class ContestPageComponent {
+  contestService:ContestService=inject(ContestService)
   route:ActivatedRoute=inject(ActivatedRoute)
   id:number
-
-  contestService:ContestService=inject(ContestService)
   file: File | null = null;
+  contest:Contest
+  userSubmissions:Submission[]=[]
 
   constructor(private activatedRoute: ActivatedRoute) {
     this.id=Number(this.route.snapshot.params['id']);
   }
 
-  @ViewChild('upcomingContest') upcomingContest: TemplateRef<any>;
-  @ViewChild('runningContest') runningContest: TemplateRef<any>;
-  @ViewChild('archivedContest') archivedContest: TemplateRef<any>;
-
-  contest = {
-    id: 1,
-    name: 'Mock Contest',
-    host: 'Mock Host',
-    state: 'upcoming',
-    description: 'This is a mock contest. It is for testing purposes. It is not real. Current contest is hosted by Laura and please follow her rules. Thank you! Also, this is a long description to test the overflow of the description. This is a mock contest. It is for testing purposes. It is not real. Current contest is hosted by Laura and please follow her rules. Thank you! Also, this is a long description to test the overflow of the description. This is a mock contest. It is for testing purposes. It is not real. Current contest is hosted by Laura and please follow her rules. Thank you! Also, this is a long description to test the overflow of the description.',
-    startTime: '2021-01-01 00:02:00',
-    duration: 60,
-    votes: {
-      status: 'not opened yet',
-      //up: 10,
-      //down: 5,
-    },
-    task: {
-      id: 1,
-      title: 'Mock Task',
-      description: 'This is a mock task.',
-      constraints: '1 ≤ a, b ≤ 10^9',
-      difficulty: 'Easy',
-    },
-    participants: 10,
-    maximumParticipants: 15,
-    submissions: 20,
-    maxRating: 100,
-  };
-
-  getTemplate(contest) {
-    switch (contest.state) {
-      case 'upcoming':
-        return this.upcomingContest;
-      case 'running':
-        return this.runningContest;
-      case 'archived':
-        return this.archivedContest;
-      default:
-        return null; // or return a default template
-    }
-  }
-
 
   ngOnInit(): void {
     this.id = Number(this.activatedRoute.snapshot.params['id']);
-    // Here you would normally fetch the contest data using the id
-    // But since you're using mock data, you don't need to fetch anything
+    this.contestService.getContest(this.id).then((contest)=>{
+      this.contest=contest
+    }).catch(error=>{
+      alert(error+' contest does not exist')
+    })
   }
+
   onFileSelected(event: Event) {
     const target = event.target as HTMLInputElement;
     const files = target.files;
@@ -98,53 +62,3 @@ export class ContestPageComponent {
     }
   }
 }
-
-
-
-//
-
-/// THE REAL ONE : 
-
-// export class ContestPageComponent {
-//   route:ActivatedRoute=inject(ActivatedRoute)
-//   id:number
-//   service:Service=inject(Service)
-
-//   // JUST FOR TESTS
-//   // Mock contest object
-//   contest = {
-//     id: 1,
-//     title: 'Mock Contest',
-//     description: 'This is a mock contest for testing purposes.',
-//     startTime: '2021-01-01 00:00:00',
-//     duration: 60,
-//     task: {
-//       id: 1,
-//       title: 'Mock Task',
-//       description: 'This is a mock task for testing purposes.',
-//       input: '1 2\n3 4',
-//       output: '3\n7',
-//       constraints: '1 ≤ a, b ≤ 10^9',
-//       sampleInput: '1 2\n3 4',
-//       sampleOutput: '3\n7',
-//       explanation: '3 = 1 + 2\n7 = 3 + 4',
-//       difficulty: 'Easy',
-//     },
-//     participants: 10,
-//     maximumParticipants: 15,
-//     submissions: 20,
-//     maxScore: 100,
-//   };
-
-//   // constructor(){
-//   //   this.id=Number(this.route.snapshot.params['id']);
-//   // }
-
-//   //constructor(private route: ActivatedRoute, private contestService: Service) { }
-
-//   constructor(private activatedRoute: ActivatedRoute, private contestService: Service) { }
-
-//   ngOnInit(): void {
-//     this.id = Number(this.activatedRoute.snapshot.params['id']);
-//   }
-// }

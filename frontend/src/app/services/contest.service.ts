@@ -11,15 +11,20 @@ export class ContestService {
 
   constructor() { }
 
-  async getContest(id: number) {
-    return axios.get(ServerUrls.base + '/contest/' + id,
-
-    {
-      headers: {
-        'Authorization': `Bearer ${this.authenticationService.getToken()}`
-      }
-    });
-
+  async getContest(id: number): Promise<Contest> {
+    return new Promise<Contest>((accept, reject) => {
+      axios.get(ServerUrls.base + '/contest/' + id,
+        {
+          headers: {
+            'Authorization': `Bearer ${this.authenticationService.getToken()}`
+          }
+        }).then(response => {
+          let contest:Contest= Object.assign(new Contest(), response.data)
+          accept(contest)
+        }).catch(error => {
+          reject(error)
+        })
+    })
   }
 
   async getContestPage(id: number, index: number, page_size: number) {
