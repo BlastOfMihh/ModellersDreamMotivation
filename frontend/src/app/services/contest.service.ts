@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {Contest} from "../domain/contest";
 import {AuthenticationService} from "./authentication.service";
 import axios from "axios";
+import { Submission } from '../domain/submission';
 
 @Injectable()
 export class ContestService {
@@ -11,6 +12,25 @@ export class ContestService {
 
   constructor() { }
 
+  async getSubmissions(id): Promise<Submission[]> {
+    return new Promise<Submission[]>((accept, reject) => {
+      axios.get(ServerUrls.base + '/submission/' + id, {
+        headers: {
+          'Authorization': `Bearer ${this.authenticationService.getToken()}`
+        }
+      }).then(response => {
+        let submissions: Submission[] = response.data.map(
+          submission => {
+            let new_submission=Object.assign(new Submission(), submission)
+            return new_submission
+          }
+        );
+        accept(submissions);
+      }).catch(error => {
+        reject(error);
+      });
+    });
+  }
   async getContest(id: number): Promise<Contest> {
     return new Promise<Contest>((accept, reject) => {
       axios.get(ServerUrls.base + '/contest/' + id,

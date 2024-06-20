@@ -35,35 +35,29 @@ export const routes: Routes = [
     pathMatch: 'full'
     // ,canActivate: [AuthGuard]
   },
-    {
-        path: 'home',
-        component: HomePageComponent,
-        title: 'Home page'
-    },
-    {
-        path: 'contest/:id',
-        component: ContestPageComponent,
-        title: 'Contest'
-    },
-    // JUST FOR TESTS
-    {
-        path: 'contest',
-        component: ContestPageComponent,
-        title: 'Contest'
-    },
-    {
-        path: 'profile/:id',
-        component: ProfilePageComponent,
-        title: 'Profile'
-    },
-    {
-        path: "contest-creation",
-        component: CreateContestPageComponent,
-        title: 'Create contest'
-    },
-    {
-        path: '',
-        redirectTo: '/home',
-        pathMatch: 'full'
-    },
+  {
+    path: 'home',
+    component: HomePageComponent,
+    title: 'Home page'
+  },
+  {
+    path: 'contest/:id',
+    component: ContestPageComponent,
+    title: 'Contest'
+  },
+  {
+    path: 'profile/:id',
+    component: ProfilePageComponent,
+    title: 'Profile'
+  },
+  {
+    path: "contest-creation",
+    component: CreateContestPageComponent,
+    title: 'Create contest'
+  },
+  {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
+  },
 ];

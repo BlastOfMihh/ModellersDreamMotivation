@@ -1,6 +1,12 @@
 
-<div class="contest-container">
+<div *ngIf="contest"  class="contest-container">
     <div class="contest-card">
+      <div class="duration-section">
+        <h2 class="start-time-title">Start Time</h2>
+        <p class="card-text-start-time">{{ contest.start_time }}</p>
+        <h2 class="duration-title"> End Time</h2>
+        <p class="card-text-minutes">{{ contest.end_time }} minutes</p>
+      </div>
       <div class="card-header">
         <h1 class="card-title">{{ contest.name }}</h1>
         <!-- <h2 class="card-subtitle-host text-muted">Hosted by: {{ contest.host }}</h2> -->
@@ -8,8 +14,9 @@
       </div>
       <div class="card-body">
         <div class="middle-section">
-          <h2 class="card-subtitle mb-2 text-muted">Description</h2>
-          <p class="card-text">{{ contest.description }}</p>
+          <!-- <h2 class="card-subtitle mb-2 text-muted">Description</h2>
+          <p class="card-text">{{ contest.description }}</p> -->
+
           <div class="task-section">
             <h2 class="card-subtitle mb-2 text-muted">Task</h2>
             <!-- <p class="card-text">{{ contest.task.title }}</p> -->
@@ -19,14 +26,8 @@
             <h2 class="participants-title">Participants</h2>
             <p class="card-text-participants">{{ contest.participants }} / {{ contest.maximumParticipants }}</p>
           </div> -->
-          <div class="duration-section">
-            <h2 class="start-time-title">Start Time</h2>
-            <p class="card-text-start-time">{{ contest.start_time }}</p>
-            <h2 class="duration-title"> End Time</h2>
-            <p class="card-text-minutes">{{ contest.end_time }} minutes</p>
-          </div>
 
-          <div class="submissions-score-section">
+          <div *ngIf="None" class="submissions-score-section">
             <div class="submissions-group">
               <h2 class="card-subtitle mb-2 text-muted">Submissions</h2>
               <!-- <p class="card-text-submissions">{{ contest.submissions }}</p> -->
@@ -42,18 +43,33 @@
             <h2 class="card-subtitle mb-2 text-muted">Maximum Current Score</h2>
             <p class="card-text-rating">{{ contest.maxRating }}</p>
           </div> -->
+
+          <table>
+            <tr>
+              <th> Submission time </th>
+              <th> view </th>
+            </tr>
+            <tr *ngFor="let submission of userSubmissions">
+              <td>{{submission.time}}</td>
+              <td> 
+                <button (click)="selectSubmission(submission.id)">view submission</button>
+              </td>
+            </tr>
+          </table>
+
+          <app-view-model *ngIf="selectedModelId" [submission_id]="selectedModelId"></app-view-model>
+          <input type="file" id="file" (change)="onFileSelected($event)">
+
+          <br>
+          <button (click)="onSubmit()">Submit</button>
+
           <div class="voting-section">
-            <h2 class="voting-title">Voting</h2>
-            <a href="/view-votes/0">  <!--  0 este id-ul contest-ului -->
-              <button class="voting-btn">Go to Voting Section</button>
-            </a>
+          <!-- <h2 class="voting-title">Voting</h2> -->
+          <a href="/view-votes/0">  <!--  0 este id-ul contest-ului -->
+            <button class="voting-btn">Go to Voting Section</button>
+          </a>
           </div>
           <div>
-            <app-view-model></app-view-model>
-            <input type="file" id="file" (change)="onFileSelected($event)">
-
-            <br>
-            <button (click)="onSubmit()">Submit</button>
           </div>
         </div>
       </div>

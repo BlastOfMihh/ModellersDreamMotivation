@@ -41,18 +41,36 @@ export class EngineService implements OnDestroy {
     this.scene.add(this.camera);
 
     // soft white light
+    // this.scene.background = new THREE.Color(0xa0a0a0);
+    // this.scene.fog = new THREE.Fog(0xa0a0a0, 10, 50);
 
-    let directionalLight = new THREE.PointLight(0xffffff, 15);
-    directionalLight.position.set(0, 1.5, 2);
-    this.scene.add(directionalLight);
+    const hemiLight = new THREE.HemisphereLight(0xffffff, 0x8d8d8d, 2);
+    hemiLight.position.set(0, 50, 0);
+    this.scene.add(hemiLight);
 
-    let lightUnder = new THREE.PointLight(0xffffff, 40);
-    lightUnder.position.set(0, -4, -5);
-    this.scene.add(lightUnder);
 
-    // Add an ambient light
-    let ambientLight = new THREE.AmbientLight(0x404040,1); // soft white light
-    this.scene.add(ambientLight);
+    const dirLight2 = new THREE.DirectionalLight(0xffffff, 2);
+    dirLight2.position.set(-3, -10, -10);
+    dirLight2.castShadow = true;
+    dirLight2.shadow.camera.top = 2;
+    dirLight2.shadow.camera.bottom = - 2;
+    dirLight2.shadow.camera.left = - 2;
+    dirLight2.shadow.camera.right = 2;
+    dirLight2.shadow.camera.near = 0.1;
+    dirLight2.shadow.camera.far = 40;
+    this.scene.add(dirLight2);
+
+    const dirLight = new THREE.DirectionalLight(0xffffff, 20);
+    dirLight.position.set(3, 10, 10);
+    dirLight.castShadow = true;
+    dirLight.shadow.camera.top = 2;
+    dirLight.shadow.camera.bottom = - 2;
+    dirLight.shadow.camera.left = - 2;
+    dirLight.shadow.camera.right = 2;
+    dirLight.shadow.camera.near = 0.1;
+    dirLight.shadow.camera.far = 40;
+    this.scene.add(dirLight);
+
 
     const geometry = new THREE.BoxGeometry(1, 2, 1);
     const material = new THREE.MeshStandardMaterial({color: 0x00ff00});

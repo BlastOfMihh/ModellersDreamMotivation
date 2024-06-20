@@ -22,16 +22,15 @@ export class ViewModelComponent implements OnInit {
   public rendererCanvas: ElementRef<HTMLCanvasElement>;
 
   @Input()
-  contest_id:number
+  submission_id:number
 
   engServ=inject(EngineService)
 
   public ngOnInit(): void {
     this.engServ.createScene(this.rendererCanvas);
     this.engServ.animate();
-
     //fix
-    let givenModel = ServerUrls.base + '/model/1'
+    let givenModel = ServerUrls.base + '/model/'+this.submission_id
     const loader = new GLTFLoader();
     loader.load(givenModel, (gltf) => {
       this.engServ.addToScene(gltf.scene);

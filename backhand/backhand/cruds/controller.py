@@ -167,7 +167,7 @@ def register_routes(app:Flask, socketio, service):
         try:
             user_id=get_user_id()
             contest_id=int(contest_id)
-            return service.get_user_submissions(user_id, contest_id)
+            return [sub.to_dict() for sub in service.get_user_submissions(user_id, contest_id)]
         except Exception as e:
             return str(e), 400
     

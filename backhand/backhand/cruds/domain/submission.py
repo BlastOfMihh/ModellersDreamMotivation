@@ -24,14 +24,13 @@ class Submission(db.Model):
         self.user_id = user_id
         self.contest_id = contest_id
         self.binary_model = binary_model
-        self.time=datetime.now
+        self.time=datetime.now()
 
     def to_dict(self):
         return {
             'id': self._id,
             'user_id': self.user_id,
             'contest_id': self.contest_id,
-            'binary_model': self.binary_model,
             'time': self.time
         }
 

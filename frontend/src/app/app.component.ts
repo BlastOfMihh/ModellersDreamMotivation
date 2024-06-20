@@ -53,6 +53,7 @@ export class SocketOne extends Socket {
     <router-outlet></router-outlet>
     <app-footer></app-footer>
   `,
+  styleUrl:'app.component.scss',
   providers: [SocketOne, ContestService]
 })
 export class AppComponent {
