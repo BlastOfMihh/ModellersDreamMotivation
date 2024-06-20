@@ -10,8 +10,7 @@ class Service:
 
     def user_vote(self, user_id, to_user_id, contest_id, grade):
         user=self.user_get(user_id)
-
-        return 
+        # return 
 
 
     def contest_get(self, id):
@@ -43,8 +42,8 @@ class Service:
 
     def participant_add(self, user_id, contest_id):
         contest=self.contest_get(contest_id)
-        user=self.user_get(user_id)
-        if contest.get_state()==ContestStates.BEFORE_START:
+        # user=self.get_user(user_id)
+        if contest.get_state()==ContestStates.BEFORE_START or contest.get_state()==ContestStates.RUNNING:
             return self.repo.participant_add(user_id, contest_id)
         else :
             raise Exception('You can enroll only before the contest has started')
@@ -67,11 +66,8 @@ class Service:
         self.repo.user_update(id, updated_user)
 
     def user_get(self, id):
-        user = self.repo.user_get(id)
-        return {
-            "username": user.username,
-            "email": user.email,
-        }
+        user = self.repo.get_user(id)
+        return user
 
     def get_all_users(self, page=1, per_page=10):
         return self.repo.get_all_users(page, per_page)

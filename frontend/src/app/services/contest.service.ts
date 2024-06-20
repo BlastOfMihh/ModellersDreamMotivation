@@ -12,6 +12,37 @@ export class ContestService {
 
   constructor() { }
 
+
+  async getParticipants(contest_id: number): Promise<any[]> {
+    return new Promise<any[]>((accept, reject) => {
+      axios.get(ServerUrls.base + '/contest/' + contest_id + '/participants', {
+        headers: {
+          'Authorization': `Bearer ${this.authenticationService.getToken()}`
+        }
+      }).then(response => {
+        accept(response.data);
+      }).catch(error => {
+        reject(error);
+      });
+    });
+  }
+
+  async enroll(contest_id: number): Promise<void> {
+    return new Promise<void>((accept, reject) => {
+      axios.post(ServerUrls.base + '/enroll' , {
+        contest_id: contest_id
+      }, {
+        headers: {
+          'Authorization': `Bearer ${this.authenticationService.getToken()}`
+        }
+      }).then(response => {
+        accept();
+      }).catch(error => {
+        reject(error);
+      });
+    });
+  }
+
   async getSubmissions(id): Promise<Submission[]> {
     return new Promise<Submission[]>((accept, reject) => {
       axios.get(ServerUrls.base + '/submission/' + id, {

@@ -16,6 +16,7 @@ from .domain.user import User
 from .domain.contest import ContestStates
 
 from datetime import datetime
+from .domain.participant import Participant
 
 def manager_only_decorator(func):
     def wrapper(*args, **kwargs):
@@ -133,15 +134,29 @@ def register_routes(app:Flask, socketio, service):
             json=request.get_json()
             user_id=get_user_id()
             contest_id=int(json["contest_id"])
-            return service.participant_add(user_id,contest_id)
+            return service.participant_add(user_id,contest_id).to_dict()
         except Exception as e:
             return str(e), 400
+        
+    @app.route("/contest/<int:contest_id>/participants", methods=['GET'])
+    @jwt_required()
+    def get_participants(contest_id):
+        try:
+            # participants = service.get_participants(contest_id)
+            participants = Participant.query.filter_by(contest_id=contest_id).all()
+            answer=[participant.to_dict() for participant in participants]
+            for i in range(len(answer)):
+                user_id=get_user_id()
+                answer[i]['last_submission_id']=service.get_user_submissions(user_id, contest_id)[0]._id
+                answer[i]['username']=service.user_get(user_id).username
+            return answer
+        except Exception as e:
+            return str(e), 400 
 
     @app.route("/submit", methods=['POST'])
     @jwt_required()
     def submission_post():
-        # try:
-        if True:
+        try:
             user_id = get_user_id()
             contest_id = int(request.form.get("contest_id"))
             binary_model_file = request.files.get("binary_model")
@@ -158,8 +173,8 @@ def register_routes(app:Flask, socketio, service):
                 return 'Submission received!', 200
             else:
                 raise Exception("Contest is not running")
-        # except Exception as e:
-        #     return str(e), 400
+        except Exception as e:
+            return str(e), 400
         
     @app.route("/submission/<contest_id>", methods=['GET'])
     @jwt_required()
@@ -293,7 +308,7 @@ def register_user_routes(app, socketio, service, db):
         
     @app.route("/users/<id>", methods=['GET'])
     @jwt_required()
-    @admin_only_decorator
+    # @admin_only_decorator
     def user_get(id):
         try:
             service.user_get(id)

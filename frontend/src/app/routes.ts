@@ -7,6 +7,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { AuthGuard } from './auth-guard';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { CreateContestPageComponent } from './create-contest-page/create-contest-page.component';
+import { VotingComponent } from './voting/voting.component';
 
 export const routes: Routes = [
   {
@@ -44,6 +45,11 @@ export const routes: Routes = [
     path: 'contest/:id',
     component: ContestPageComponent,
     title: 'Contest'
+  },
+  {
+    path: 'voting/:id',
+    component: VotingComponent,
+    title: 'Contest Voting'
   },
   {
     path: 'profile/:id',

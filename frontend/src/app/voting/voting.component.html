@@ -1,1 +1,17 @@
-<p>voting works!</p>
+<div class="container-specific"> 
+
+    <h1 *ngIf="contest"> Voting for contest:{{contest.name}}</h1>
+    <table *ngIf="participants">
+        <tr>
+            <th> Username </th>
+            <th> Controls </th>
+        </tr>
+        <tr *ngFor="let participant of participants">
+            <td> {{participant.username}} </td>
+            <button (click)="viewModel(participant.last_submission_id)"> view model</button>
+        </tr>
+    </table>
+    <app-view-model *ngIf="selectedModelId" [submission_id]="selectedModelId"> </app-view-model>
+
+</div>
+

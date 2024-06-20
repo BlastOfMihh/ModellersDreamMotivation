@@ -35,13 +35,11 @@ export class ContestPageComponent {
   selectedModelId:number
 
   constructor(private activatedRoute: ActivatedRoute) {
-    this.id=Number(this.route.snapshot.params['id']);
   }
 
-  selectSubmission(id){
+  selectSubmission(id:number){
     this.selectedModelId=id
     this.update()
-    this.cdr.markForCheck()
   }
 
   ngOnInit(): void {
@@ -58,13 +56,18 @@ export class ContestPageComponent {
   update(){
     this.contestService.getSubmissions(this.id)
     .then((submissions:Submission[])=>{
-      this.userSubmissions.length=0
+      while(this.userSubmissions.length>0)
+        this.userSubmissions.pop()
       submissions.forEach(submission=>{
         this.userSubmissions.push(submission)
       })
       this.cdr.markForCheck()
     }).catch(error=>{
     })
+  }
+
+  enroll(){
+    this.contestService.enroll(this.id)
   }
 
   onFileSelected(event: Event) {
