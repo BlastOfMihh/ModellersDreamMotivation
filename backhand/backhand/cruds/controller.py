@@ -54,6 +54,10 @@ def register_routes(app:Flask, socketio, service):
     def broadcast_contests_refresh():
         socketio.emit("contests-refresh", "ehh")
 
+    def broadcast_refresh_submissions():
+        socketio.emit("refresh", "refreshhh")
+        socketio.emit("refresh-submissions", "refreshhh")
+
     def contest_dict_for_basic_user(contest_dict):
         invoker=get_jwt_identity()
         if str(invoker['user_type'])==str(UserTypes.BASIC.value):
@@ -99,17 +103,17 @@ def register_routes(app:Flask, socketio, service):
             start_time=datetime.strptime(json["start_time"], '%Y-%m-%d %H:%M:%S')
             end_time=datetime.strptime(json["end_time"], '%Y-%m-%d %H:%M:%S')
             if request.method=='POST':
+                ans=service.contest_add(name, task, max_participants_count, start_time, end_time).to_dict(), 200
                 broadcast_contests_refresh()
-                return service.contest_add(name, task, max_participants_count, start_time, end_time).to_dict(), 200
+                return ans
             elif request.method=='PUT':
                 id=int(json["id"])
+                ans=service.contest_update(id, name, task, max_participants_count, start_time, end_time).to_dict(), 200
                 broadcast_contests_refresh()
-                return service.contest_update(id, name, task, max_participants_count, start_time, end_time).to_dict(), 200
+                return ans
         except Exception as e:
             return str(e), 400
 
-    def broadcast_submissions_refresh():
-        socketio.emit("submissions-refresh", "ehh")
 
 
     @app.route("/contest/page", methods=['POST'])
@@ -146,7 +150,7 @@ def register_routes(app:Flask, socketio, service):
             participants = Participant.query.filter_by(contest_id=contest_id).all()
             answer=[participant.to_dict() for participant in participants]
             for i in range(len(answer)):
-                user_id=get_user_id()
+                user_id=int(answer[i]["user_id"])
                 answer[i]['last_submission_id']=service.get_user_submissions(user_id, contest_id)[0]._id
                 answer[i]['username']=service.user_get(user_id).username
             return answer
@@ -168,8 +172,8 @@ def register_routes(app:Flask, socketio, service):
                     print(type(binary_model))
                 else:
                     raise ValueError("No file part")
-                broadcast_submissions_refresh()
                 service.submission_add(user_id, contest_id, binary_model)
+                broadcast_refresh_submissions()
                 return 'Submission received!', 200
             else:
                 raise Exception("Contest is not running")

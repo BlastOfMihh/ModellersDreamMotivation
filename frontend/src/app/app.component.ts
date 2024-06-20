@@ -37,7 +37,8 @@ export class SocketOne extends Socket {
     CreateContestPageComponent,
     //HomePageComponent,
     HomePageModule,
-    RouterOutlet
+    RouterOutlet,
+    SocketIoModule
   ],
   selector: 'app-root',
   standalone: true,

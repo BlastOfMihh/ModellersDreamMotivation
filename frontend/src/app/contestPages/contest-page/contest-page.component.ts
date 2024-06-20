@@ -10,6 +10,8 @@ import { Contest, ContestStates } from 'src/app/domain/contest';
 import { rejects } from 'assert';
 import { Submission } from 'src/app/domain/submission';
 import { ChangeDetectorRef } from '@angular/core';
+import { SocketOne } from 'src/app/app.component';
+import { EngineService } from 'src/app/model-display/model-display';
 
 @Component({
   selector: 'app-contest-page',
@@ -26,6 +28,9 @@ export class ContestPageComponent {
   contestService:ContestService=inject(ContestService)
   route:ActivatedRoute=inject(ActivatedRoute)
   cdr:ChangeDetectorRef=inject(ChangeDetectorRef)
+  socket=inject(SocketOne)
+  engine=inject(EngineService)
+  @ViewChild(ViewModelComponent) viewModelComponent: ViewModelComponent;
 
   id:number
   file: File | null = null;
@@ -34,12 +39,19 @@ export class ContestPageComponent {
   nrs=[1,2,3]
   selectedModelId:number
 
+
   constructor(private activatedRoute: ActivatedRoute) {
+    this.socket.on('refresh', (data:any)=>{
+      alert("updating")
+      this.update()
+    })
+    this.update()
   }
 
   selectSubmission(id:number){
     this.selectedModelId=id
-    this.update()
+    this.engine.reset()
+    this.engine.load_submission(id)
   }
 
   ngOnInit(): void {

@@ -38,9 +38,10 @@ export class LoginPageComponent {
       localStorage.setItem("user_type", response.data.user_type)
       localStorage.setItem("user_id", response.data.id)
       if (response.data.user_type=='admin')
-        this.router.navigate(["/admin_panel"])
+        this.router.navigate(["/contest/1"])
       else
-        this.router.navigate(["/"])
+        this.router.navigate(["/contest/1"])
+        // this.router.navigate(["/"])
     }else{
       alert("bad login attempt")
     }

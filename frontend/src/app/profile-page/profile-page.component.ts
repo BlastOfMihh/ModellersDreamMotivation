@@ -33,8 +33,8 @@ export class ProfilePageComponent {
 
   user = {
     id: 1,
-    username: 'laura1234',
-    email: 'laurachiriac.cl@gmail.com',
+    username: 'mihhh',
+    email: 'mihh',
     role: 'user', // 'admin', 'manager', 'user', ... tu stii aici
     rating: 100,
     contests: 10,

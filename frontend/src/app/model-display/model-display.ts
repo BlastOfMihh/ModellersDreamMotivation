@@ -1,6 +1,8 @@
 import { ElementRef, Injectable, NgZone, OnDestroy } from '@angular/core';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { ServerUrls } from '../urls';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 @Injectable({ providedIn: 'root' })
 export class EngineService implements OnDestroy {
@@ -19,6 +21,15 @@ export class EngineService implements OnDestroy {
   public constructor(private ngZone: NgZone) {
   }
 
+  load_submission(submission_id){
+    let givenModel = ServerUrls.base + '/model/'+submission_id
+    const loader = new GLTFLoader();
+    loader.load(givenModel, (gltf) => {
+      this.addToScene(gltf.scene);
+    }, undefined, function (error) {
+      // console.error(error);
+    });
+  }
 
   public createScene(canvas: ElementRef<HTMLCanvasElement>): void {
     // The first step is to get the reference of the canvas element from our HTML document
@@ -82,8 +93,17 @@ export class EngineService implements OnDestroy {
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
   }
 
+  added=[]
   public addToScene(model){
     this.scene.add(model);
+    this.added.push(model)
+  }
+
+  reset(){
+    this.added.forEach(model => {
+      this.scene.remove(model);
+    });
+    this.added = [];
   }
 
   public animate(): void {

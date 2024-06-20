@@ -30,13 +30,7 @@ export class ViewModelComponent implements OnInit {
     this.engServ.createScene(this.rendererCanvas);
     this.engServ.animate();
     //fix
-    let givenModel = ServerUrls.base + '/model/'+this.submission_id
-    const loader = new GLTFLoader();
-    loader.load(givenModel, (gltf) => {
-      this.engServ.addToScene(gltf.scene);
-    }, undefined, function (error) {
-      // console.error(error);
-    });
+    this.engServ.load_submission(this.submission_id)
   }
 
 }

@@ -11,6 +11,8 @@ import { Submission } from 'src/app/domain/submission';
 import { ChangeDetectorRef } from '@angular/core';
 import { ContestService } from '../services/contest.service';
 import { Participant } from '../domain/participant';
+import { SocketOne } from '../app.component';
+import { EngineService } from '../model-display/model-display';
 
 
 @Component({
@@ -30,8 +32,14 @@ export class VotingComponent {
   contest:Contest
   participants:Participant[]=[]
   selectedModelId:number
+  socket=inject(SocketOne)
+  engine=inject(EngineService)
   constructor() {
     this.id=Number(this.route.snapshot.params['id']);
+    this.socket.on('refresh', (data:any)=>{
+      this.update()
+    })
+    this.update()
   }
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.params['id']);
@@ -47,6 +55,8 @@ export class VotingComponent {
   viewModel(model_id){
     this.selectedModelId=model_id
     this.cdr.markForCheck()
+    this.engine.reset()
+    this.engine.load_submission(model_id)
   }
 
   update(){

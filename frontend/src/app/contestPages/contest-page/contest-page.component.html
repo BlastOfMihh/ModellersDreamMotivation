@@ -58,7 +58,7 @@
             </tr>
           </table>
 
-          <app-view-model *ngIf="selectedModelId" [submission_id]="selectedModelId"></app-view-model>
+          <app-view-model class="view_model" *ngIf="selectedModelId" [submission_id]="selectedModelId" ></app-view-model>
           <input type="file" id="file" (change)="onFileSelected($event)">
 
           <br>

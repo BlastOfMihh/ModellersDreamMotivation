@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { HomePageComponent } from './home-page.component';
 
 @NgModule({
-  declarations: [HomePageComponent],
-  imports: [CommonModule],
+  declarations: [],
+  imports: [CommonModule, HomePageComponent],
   exports: [HomePageComponent]
 })
 export class HomePageModule { }

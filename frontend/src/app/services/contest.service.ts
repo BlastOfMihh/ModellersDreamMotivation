@@ -79,15 +79,21 @@ export class ContestService {
   }
 
   async getContestPage(id: number, index: number, page_size: number) {
-    return axios.post(ServerUrls.base + '/contest/page', {
-      'id': id,
-      'index': index,
-      'page_size': page_size
-    }, {
-      headers: {
-        'Authorization': `Bearer ${this.authenticationService.getToken()}`
-      }
-    });
+    // return new Promise<Contest[]>(
+    // return axios.post(ServerUrls.base + '/contest/page', {
+    //   'id': id,
+    //   'index': index,
+    //   'page_size': page_size
+    // }, {
+    //   headers: {
+    //     'Authorization': `Bearer ${this.authenticationService.getToken()}`
+    //   }
+    // }).then(response=>{
+    //     let contest:Contest= Object.assign(new Contest(), response.data)
+    //     accept(contest)
+    // }).catch(error=>{
+
+    // })
   }
 
   async submitSubmission(file: File, contestId: number) {
